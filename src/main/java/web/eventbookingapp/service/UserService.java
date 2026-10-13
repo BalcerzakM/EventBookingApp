@@ -5,6 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.eventbookingapp.dto.RegistrationDto;
+import web.eventbookingapp.exception.EmailAlreadyExistsException;
+import web.eventbookingapp.exception.UsernameAlreadyExistsException;
 import web.eventbookingapp.model.UserEntity;
 import web.eventbookingapp.repository.UserRepository;
 
@@ -17,10 +19,10 @@ public class UserService {
     @Transactional
     public void registerUser(RegistrationDto user) throws UsernameAlreadyExistsException {
         if(userRepository.existsByUsername((user.getUsername()))){
-            throw new UsernameAlreadyExistsException("Użytkownik o tej nazwie już istnieje");
+            throw new UsernameAlreadyExistsException("Username is already in use!");
         }
         if (userRepository.existsByEmail(user.getEmail())){
-            throw new EmailAlreadyExistsException("Adres email jest już zajęty");
+            throw new EmailAlreadyExistsException("Email is already in use!");
         }
 
         UserEntity userEntity = new UserEntity();
