@@ -1,109 +1,108 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" th:href="@{/thymeleaf/favicon.png}">
     <link rel="stylesheet" th:href="@{/thymeleaf/style.css}">
-    <title>Rejestracja</title>
+    <title>Register</title>
 </head>
 <body>
-    <header>
-        <a th:href="@{/}"><img id="logo" th:src="@{/thymeleaf/images/logo.png}" alt="SRUBA Logo"></a>
-    </header>
-    <hr class="content-divider"/>
-    <main>
-        <div class="form-container">
+<header>
+    <a th:href="@{/}"><img id="logo" th:src="@{/thymeleaf/images/logo.png}" alt="Logo"></a>
+</header>
+<hr class="content-divider"/>
+<main>
+    <div class="form-container">
 
-            <h1>Utwórz konto </h1>
-            <p>Dołącz do aplikacji już teraz</p>
+        <h1>Create an Account</h1>
+        <p>Join the application today</p>
 
-            <div th:if="${error}" class="alert alert-error" th:text="${error}">
-                Wystąpił błąd
-            </div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}">
+            An error occurred
+        </div>
 
+        <div th:if="${success}" class="alert alert-success" th:text="${success}">
+            Your account has been created
+        </div>
 
-            <div th:if="${success}" class="alert alert-success" th:text="${success}">
-                Konto zostało utworzone
-            </div>
+        <form th:action="@{/mvc/register}" method="post" th:object="${registrationDto}">
 
-            <form th:action="@{/mvc/register}" method="post" th:object="${registrationDto}">
-
-                <div class="form-group">
-                    <label for="username">Login</label>
-                    <input
-                            type="text"
-                            id="username"
-                            th:field="*{username}"
-                            placeholder="Wpisz login"
-                            required>
-                    <p class="alert alert-error"
-                       th:if="${#fields.hasErrors('username')}"
-                       th:errors="*{username}">
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input
-                            type="email"
-                            id="email"
-                            th:field="*{email}"
-                            placeholder="Wpisz email"
-                            required>
-
-                    <p class="alert alert-error"
-                       th:if="${#fields.hasErrors('email')}"
-                       th:errors="*{email}">
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Hasło</label>
-                    <input
-                            type="password"
-                            id="password"
-                            th:field="*{password}"
-                            placeholder="Wpisz hasło"
-                            required>
-                    <p class="alert alert-error"
-                       th:if="${#fields.hasErrors('password')}"
-                       th:errors="*{password}">
-                    </p>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Powtórz hasło</label>
-                    <input
-                            type="password"
-                            id="confirmPassword"
-                            th:field="*{confirmPassword}"
-                            placeholder="Powtórz hasło"
-                            required>
-                    <p class="alert alert-error"
-                       th:if="${#fields.hasErrors('confirmPassword')}"
-                       th:errors="*{confirmPassword}">
-                    </p>
-                </div>
-
-                <button type="submit" class="form-btn">
-                    Zarejestruj się
-                </button>
-
-            </form>
-
-            <div class="extra-links">
-                <p>
-                Masz już konto?
-                <a th:href="@{/mvc/login}">Zaloguj się</a>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                        type="text"
+                        id="username"
+                        th:field="*{username}"
+                        placeholder="Enter your username"
+                        required>
+                <p class="alert alert-error"
+                   th:if="${#fields.hasErrors('username')}"
+                   th:errors="*{username}">
                 </p>
             </div>
 
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                        type="email"
+                        id="email"
+                        th:field="*{email}"
+                        placeholder="Enter your email"
+                        required>
+
+                <p class="alert alert-error"
+                   th:if="${#fields.hasErrors('email')}"
+                   th:errors="*{email}">
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                        type="password"
+                        id="password"
+                        th:field="*{password}"
+                        placeholder="Enter your password"
+                        required>
+                <p class="alert alert-error"
+                   th:if="${#fields.hasErrors('password')}"
+                   th:errors="*{password}">
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                        type="password"
+                        id="confirmPassword"
+                        th:field="*{confirmPassword}"
+                        placeholder="Confirm your password"
+                        required>
+                <p class="alert alert-error"
+                   th:if="${#fields.hasErrors('confirmPassword')}"
+                   th:errors="*{confirmPassword}">
+                </p>
+            </div>
+
+            <button type="submit" class="form-btn">
+                Register
+            </button>
+
+        </form>
+
+        <div class="extra-links">
+            <p>
+                Already have an account?
+                <a th:href="@{/mvc/login}">Sign In</a>
+            </p>
         </div>
-    </main>
-    <hr class="content-divider"/>
-    <footer>
-        <p>&copy; 2026 SRUBA Inc. Wszelkie prawa zastrzeżone.</p>
-    </footer>
+
+    </div>
+</main>
+<hr class="content-divider"/>
+<footer>
+    <p>&copy; 2026 All rights reserved.</p>
+</footer>
 </body>
 </html>
