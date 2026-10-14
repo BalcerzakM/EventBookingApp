@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .httpBasic(basic -> basic.authenticationEntryPoint((request, response, authException) -> {
                     if (request.getRequestURI().startsWith("/api/")) {
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        response.getWriter().write("Brak autoryzacji - musisz sie zalogowac przez Basic Auth"); //cały if do wysyłania komunikatu gdy ktoś chce skorzystać z api bez autoryzacji
+                        response.getWriter().write("Authorization Error - you have to be logged in to send an api request");
                     } else {
                         response.sendRedirect("/mvc/login");
                     }
